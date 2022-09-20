@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="container--title">
+    <div>
+      Código Penal
+    </div>
+    <input type="text" name="crime" placeholder="Crime Ex. assédio" (keyup)="filterCodPenal($event)">
+  </div>
+  <form class="container--codpenal">
+    <div class="codpenal" *ngFor="let cod of listCodPenal">
+      <div class="codpenal--check">
+        <input [id]="'art'+cod.art" type="checkbox" [checked]="verifySelectedArt(cod) == true" (change)="selectedArt($event, cod)">
+        <label [for]="'art'+cod.art" class="checkmark"></label>
+      </div>
+      <div class="codpenal--content">
+        <div>
+          <div class="art">
+            Art. {{ cod.art }}
+          </div>
+          <div class="crime">
+            {{ cod.crime }}
+          </div>
+          <div class="comentario">
+            OBS. <br>{{ cod.obs }}
+          </div>
+        </div>
+        <div>
+          <div class="servicos">
+            Serviços {{ cod.servicos }}
+          </div>
+          <div class="multa">
+            Multa {{ cod.multa }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+  <div class="container--dados">
+    <div class="container--dados-pessoais" *ngIf="searchUser">
+      <div>
+        Nome: {{ searchUser.name }}
+      </div>
+      <div>
+        Passaporte: {{ searchUser.passaporte }}
+      </div>
+      <div>
+        RG: {{ searchUser.rg }}
+      </div>
+      <div>
+        Emprego: {{ searchUser.emprego }}
+      </div>
+      <div>
+        Telefone: {{ searchUser.tel }}
+      </div>
+      <div>
+        Ficha: aaaaaaaaaaaaaaa num sei
+      </div>
+      <div>
+        Porte: Negado
+      </div>
+    </div>
+    <div class="container--dados-prisao">
+      <div>
+        <span>
+          Art.
+        </span>
+        <div>
+          <ng-container *ngFor="let art of listArt">
+            {{ art.art }},
+          </ng-container>
+        </div>
+      </div>
+      <div>
+        <span>
+          valor da multa:
+        </span>
+        {{ valorMulta }}
+      </div>
+      <div>
+        <span>
+          Quantidade de serviços:
+        </span>
+        {{ quantidadeServicos - ((reducaoServicos / 100) * quantidadeServicos) }}
+      </div>
+      <div>
+        <span>
+          Redução dos serviços: {{ reducaoServicos }}%
+        </span>
+        <input type="range" name="servicos" min="0" max="50" value="0" step="5" [(ngModel)]="reducaoServicos">
+      </div>
+
+      <div>
+        <span>
+          Descrição:
+        </span>
+        <textarea name="" id="" cols="30" rows="10" resize="false"></textarea>
+      </div>
+
+      <div>
+        <button>Prender</button>
+      </div>
+    </div>
+  </div>
+</div>

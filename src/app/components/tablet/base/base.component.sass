@@ -1,0 +1,25 @@
+.container
+    background: #000000
+    width: 75vw
+    height: 75vh
+    border-radius: var(--borderradius)
+    padding: 12px
+    box-sizing: border-box
+
+    &--tablet
+        border-radius: var(--borderradius)
+        width: 100%
+        height: 100%
+        background-color: #1E1E1E
+        display: flex
+
+        img
+            position: absolute
+            max-height: 410px
+            align-self: center
+            margin: 0px 0 0 calc(200px + 5vw)
+
+    &--content
+        width: 100%
+        height: 100%
+        overflow: hidden

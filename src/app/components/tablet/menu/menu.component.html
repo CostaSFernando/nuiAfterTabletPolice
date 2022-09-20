@@ -1,0 +1,60 @@
+<div class="container" [ngClass]="{'open': openMenu}">
+    <div class="container--logo" (click)="menu()">
+        <img src="assets/logos/logo.png" alt="" *ngIf="openMenu">
+        <p class="container--logo-description" *ngIf="openMenu">
+            1 BPM - After city
+        </p>
+    </div>
+    <div class="container--buttons">
+        <div class="container--buttons-search">
+            <div class="icon" (click)="search()">
+                <img src="assets/logos/busca-logo.png" alt="">
+            </div>
+            <div class="search" *ngIf="openMenu">
+                <input [(ngModel)]="searchPass" type="text">
+            </div>
+        </div>
+
+        <div class="container--buttons-option" style="margin-top: 50px;" [routerLink]="'/search'">
+            <div class="icon">
+                <img src="assets/logos/prison-logo.png" alt="">
+            </div>
+            <div class="text" *ngIf="openMenu">
+                Prender
+            </div>
+        </div>
+        <div class="container--buttons-option">
+            <div class="icon">
+                <img src="assets/logos/car-logo.png" alt="">
+            </div>
+            <div class="text" *ngIf="openMenu">
+                Multar
+            </div>
+        </div>
+        <div class="container--buttons-option">
+            <div class="icon">
+                <img src="assets/logos/prancheta-logo.png" alt="">
+            </div>
+            <div class="text" *ngIf="openMenu">
+                Código penal
+            </div>
+        </div>
+        <div class="container--buttons-option">
+            <div class="icon">
+                <img src="assets/logos/arma-logo.png" alt="">
+            </div>
+            <div class="text" *ngIf="openMenu">
+                Ações
+            </div>
+        </div>
+        <div class="container--buttons-option">
+            <div class="icon">
+                <img src="assets/logos/estatistica-logo.png" alt="">
+            </div>
+            <div class="text" *ngIf="openMenu">
+                Relatórios
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="container--form">
+    <input type="number" name="passaporte" #pass>
+    <button (click)="searchUser(pass)">Buscar</button>
+  </div>
+  <div class="container--details" *ngIf="userSearch">
+    <div class="item" *ngIf="userSearch.name">
+      Nome: {{ userSearch.name }}
+    </div>
+    <div class="item" *ngIf="userSearch.idade">
+      Idade: {{ userSearch.idade }}
+    </div>
+    <div class="item" *ngIf="userSearch.rg">
+      RG: {{ userSearch.rg }}
+    </div>
+    <div class="item" *ngIf="userSearch.emprego">
+      Emprego: {{ userSearch.emprego }}
+    </div>
+    <button (click)="confirm()">Confirmar</button>
+  </div>
+</div>
