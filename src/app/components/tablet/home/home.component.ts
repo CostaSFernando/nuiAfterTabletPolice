@@ -9,19 +9,21 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  user: any = null
+
   constructor(
     private auth: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    console.log('logado?');
     if (!this.auth.verifyLoged()) {
-      console.log('Sim');
       this.router.navigate(['/login']);
       return;
     }
-    console.log('Sim');
+
+    this.user = this.auth.getCurrentUser();
+
   }
 
 }

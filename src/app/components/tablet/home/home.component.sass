@@ -1,3 +1,65 @@
 .container
   width: 100%
   height: 100%
+  display: flex
+  flex-direction: column
+  font-family: 'Nunito'
+  color: white
+  font-weight: 700
+  font-size: 18px
+
+  &--header
+    height: 85%
+    padding: 20px
+
+    .estatisticas
+      background: var(--base-background-trans)
+      border-radius: var(--borderradius)
+      width: 100%
+      height: 100%
+
+  &--content
+    height: 100%
+    padding: 20px
+    display: flex
+    flex-direction: row
+
+    .foto
+      width: 50%
+      padding: 10px
+
+      &--item
+        border-radius: var(--borderradius)
+        width: 100%
+        height: 100%
+        background: var(--base-background-trans)
+
+    .data
+      width: 100%
+      height: 100%
+      padding: 10px
+      display: flex
+      flex-direction: column
+
+      &--infos
+        border-radius: var(--borderradius)
+        background: var(--base-background-trans)
+        width: 100%
+        height: 100%
+        padding: 10px
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
+
+        div
+          height: 30%
+          width: 50%
+
+      &--title
+        height: 60%
+        font-size: 28px
+        display: flex
+        padding: 20px
+
+
+

@@ -92,6 +92,7 @@ export class AuthService {
         idade: '21 anos',
         patente: 'Coronel',
         unidade: 'CORE',
+        rg: '159CE51C8E36F519',
         tel: '108-555',
         permissions: [
           'prender',

@@ -1,3 +1,58 @@
 <div class="container">
+  <div class="container--header">
+    <div class="estatisticas">
 
+    </div>
+  </div>
+  <div class="container--content">
+    <div class="foto">
+      <div class="foto--item">
+
+      </div>
+    </div>
+    <div class="data">
+      <div class="data--infos" *ngIf="user">
+        <div>
+          <span>
+            Nome:
+          </span>
+          {{ user.name }}
+        </div>
+        <div>
+          <span>
+            Passaporte:
+          </span>
+          {{ user.passaporte }}
+        </div>
+        <div>
+          <span>
+            RG:
+          </span>
+          {{ user.rg }}
+        </div>
+        <div>
+          <span>
+            telefone:
+          </span>
+          {{ user.tel }}
+        </div>
+        <div>
+          <span>
+            Patente:
+          </span>
+          {{ user.patente }}
+        </div>
+        <div>
+          <span>
+            Unidade:
+          </span>
+          {{ user.unidade }}
+        </div>
+      </div>
+
+      <div class="data--title">
+        Servir bem para servir sempre!
+      </div>
+    </div>
+  </div>
 </div>
