@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./search.component.sass']
 })
 export class SearchComponent implements OnInit {
+
+  to: string = '';
 
   userSearch: {
     name?: string,
@@ -22,10 +24,16 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.to = params['to'];
+      }
+    )
     this.auth.verifyLoged().subscribe(
       x => {
         !x? this.router.navigate(['/login']) : ''
@@ -47,7 +55,7 @@ export class SearchComponent implements OnInit {
   }
 
   confirm() {
-    this.router.navigate(['/prender'])
+    this.router.navigate([`/${this.to}`])
   }
 
 }

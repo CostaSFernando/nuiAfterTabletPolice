@@ -1,6 +1,6 @@
 <div class="container" [ngClass]="{'open': openMenu}">
     <div class="container--logo" (click)="menu()">
-        <img src="assets/logos/logo.png" alt="" *ngIf="openMenu">
+        <img src="assets/logos/logo.png" alt="" *ngIf="openMenu" [routerLink]="''">
         <p class="container--logo-description" *ngIf="openMenu">
             1 BPM - After city
         </p>
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="container--buttons-option" style="margin-top: 50px;" [routerLink]="'/search'">
+        <div class="container--buttons-option" style="margin-top: 50px;" [routerLink]="['/search', 'prender']">
             <div class="icon">
                 <img src="assets/logos/prison-logo.png" alt="">
             </div>
@@ -23,7 +23,7 @@
                 Prender
             </div>
         </div>
-        <div class="container--buttons-option"  [routerLink]="''">
+        <div class="container--buttons-option" [routerLink]="['/search', 'multar']">
             <div class="icon">
                 <img src="assets/logos/car-logo.png" alt="">
             </div>

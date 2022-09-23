@@ -1,38 +1,6 @@
 <div class="container">
-  <div class="container--title">
-    <div>
-      Código Penal
-    </div>
-    <input type="text" name="crime" placeholder="Crime Ex. assédio" (keyup)="filterCodPenal($event)">
-  </div>
   <form class="container--codpenal">
-    <div class="codpenal" *ngFor="let cod of listCodPenal">
-      <div class="codpenal--check">
-        <input [id]="'art'+cod.art" type="checkbox" [checked]="verifySelectedArt(cod) == true" (change)="selectedArt($event, cod)">
-        <label [for]="'art'+cod.art" class="checkmark"></label>
-      </div>
-      <div class="codpenal--content">
-        <div>
-          <div class="art">
-            Art. {{ cod.art }}
-          </div>
-          <div class="crime">
-            {{ cod.crime }}
-          </div>
-          <div class="comentario">
-            OBS. <br>{{ cod.obs }}
-          </div>
-        </div>
-        <div>
-          <div class="servicos">
-            Serviços {{ cod.servicos }}
-          </div>
-          <div class="multa">
-            Multa {{ cod.multa }}
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-codpenal style="height: 100%;" (artData)="updateValuesArt($event)"></app-codpenal>
   </form>
   <div class="container--dados">
     <div class="container--dados-pessoais" *ngIf="searchUser">

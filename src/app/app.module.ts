@@ -58,6 +58,8 @@ import { PrenderComponent } from './components/tablet/prender/prender.component'
 import { HomeComponent } from './components/tablet/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './share/search/search.component';
+import { MultarComponent } from './components/tablet/multar/multar.component';
+import { CodpenalComponent } from './share/codpenal/codpenal.component';
 
 
 const material = [
@@ -116,7 +118,9 @@ const material = [
     LoginComponent,
     PrenderComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    MultarComponent,
+    CodpenalComponent
   ],
   imports: [
     BrowserModule,

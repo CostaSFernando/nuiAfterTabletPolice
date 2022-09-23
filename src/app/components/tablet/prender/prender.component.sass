@@ -4,25 +4,6 @@
   display: flex
   flex-direction: row
 
-  &--title
-    display: flex
-    position: absolute
-    font-size: 22px
-    width: 400px
-    height: 70px
-    color: white
-    font-weight: 700
-    align-items: center
-    justify-content: space-around
-
-    input
-      border: none
-      height: 30px
-      background: #575757
-      color: white
-      padding: 5px
-      border-radius: 5px
-
   &--dados
     background: #575757
     display: flex
@@ -62,10 +43,7 @@
           border-radius: var(--borderradius)
           border: none
           padding: 5px
-
-
   &--codpenal
-    background: #575757
     display: flex
     flex-direction: row
     flex-wrap: wrap
@@ -76,79 +54,6 @@
     font-weight: 700
     font-family: Nunito
     justify-content: space-around
-    overflow-y: scroll
-    margin-top: 70px
+    overflow-y: hidden
     width: 100%
-
-    .codpenal
-      width: 100%
-      padding: 10px
-      box-shadow: 0px 0px 4px 2px #282727
-      margin: 6px
-      background: #444444
-      color: white
-      border-radius: 2px
-      -webkit-user-select: none
-      -moz-user-select: none
-      -ms-user-select: none
-      user-select: none
-      display: flex
-
-      &--content
-        display: flex
-        flex-direction: row
-        width: 100%
-        justify-content: space-between
-        flex-wrap: nowrap
-
-        div:last-child
-          min-width: 25%
-
-      &--check
-
-        display: block
-        position: relative
-        padding-left: 35px
-        margin-bottom: 12px
-        font-size: 16px
-        -webkit-user-select: none
-        -moz-user-select: none
-        -ms-user-select: none
-        user-select: none
-
-        input
-          position: absolute
-          opacity: 0
-          cursor: pointer
-          height: 0
-          width: 0
-        .checkmark
-          position: absolute
-          top: 0
-          left: 0
-          height: 25px
-          width: 25px
-          border-radius: var(--borderradius)
-          background-color: #eee
-        &:hover input ~ .checkmark
-          background-color: #ccc
-        input:checked ~ .checkmark
-          background-color: #7A7A7A
-        .checkmark:after
-          content: ""
-          position: absolute
-          display: none
-        input:checked ~ .checkmark:after
-          display: block
-
-        .checkmark:after
-          left: 9px
-          top: 5px
-          width: 5px
-          height: 10px
-          border: solid white
-          border-width: 0 3px 3px 0
-          -webkit-transform: rotate(45deg)
-          -ms-transform: rotate(45deg)
-          transform: rotate(45deg)
 
