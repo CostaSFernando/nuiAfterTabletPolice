@@ -1,9 +1,11 @@
+import { BaseCodPenalComponent } from './components/tablet/base-cod-penal/base-cod-penal.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/tablet/home/home.component';
 import { LoginComponent } from './components/tablet/login/login.component';
 import { MultarComponent } from './components/tablet/multar/multar.component';
 import { PrenderComponent } from './components/tablet/prender/prender.component';
+import { CodpenalComponent } from './share/codpenal/codpenal.component';
 import { SearchComponent } from './share/search/search.component';
 
 const routes: Routes = [
@@ -14,14 +16,17 @@ const routes: Routes = [
     path: 'prender', component: PrenderComponent
   },
   {
-    path: '', component: HomeComponent
-  },
-  {
     path: 'search/:to', component: SearchComponent
   },
   {
     path: 'multar', component: MultarComponent
-  }
+  },
+  {
+    path: 'codpenal', component: BaseCodPenalComponent
+  },
+  {
+    path: '', component: HomeComponent
+  },
 ];
 
 @NgModule({

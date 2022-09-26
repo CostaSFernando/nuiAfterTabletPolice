@@ -60,6 +60,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './share/search/search.component';
 import { MultarComponent } from './components/tablet/multar/multar.component';
 import { CodpenalComponent } from './share/codpenal/codpenal.component';
+import { BaseCodPenalComponent } from './components/tablet/base-cod-penal/base-cod-penal.component';
 
 
 const material = [
@@ -120,7 +121,8 @@ const material = [
     HomeComponent,
     SearchComponent,
     MultarComponent,
-    CodpenalComponent
+    CodpenalComponent,
+    BaseCodPenalComponent
   ],
   imports: [
     BrowserModule,

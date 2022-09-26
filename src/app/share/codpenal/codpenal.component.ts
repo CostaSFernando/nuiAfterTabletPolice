@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-codpenal',
@@ -746,6 +746,8 @@ export class CodpenalComponent implements OnInit {
 
   valorMulta = 0
 
+  @Input() showSelected: boolean = true
+
   @Output() artData = new EventEmitter<any>();
 
 
@@ -765,20 +767,27 @@ export class CodpenalComponent implements OnInit {
       this.artData.emit({
         quantidadeServicos: this.quantidadeServicos,
         valorMulta: this.valorMulta,
-        listArt: this.listArt
+        listArt: this.listArt,
+        selectedArt: codigoPenal,
       });
     } else {
       //remove
       this.quantidadeServicos = this.quantidadeServicos - codigoPenal.servicos
       this.listArt = this.listArt.filter( art => art.art !== codigoPenal.art)
       this.valorMulta = this.valorMulta - codigoPenal.multa
-
       this.artData.emit({
         quantidadeServicos: this.quantidadeServicos,
         valorMulta: this.valorMulta,
-        listArt: this.listArt
+        listArt: this.listArt,
+        selectedArt: codigoPenal,
       });
     }
+  }
+
+  selectedArtIsNoSelected(codPenal: any) {
+    this.artData.emit({
+      selectedArt: codPenal,
+    });
   }
 
   verifySelectedArt(artSearch: any) {

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="container--codpenal">
+    <app-codpenal (artData)="openModal($event)" [showSelected]="false"></app-codpenal>
+  </div>
+  <div class="container--detalhes" id="modalArts" (click)="closeModal()">
+    <div class="container--detalhes-content">
+      <div>
+        Artigo {{ moreInformations?.art }}
+      </div>
+      <div>
+        Crime: {{ moreInformations?.crime }}
+      </div>
+      <div>
+        Observação: {{ moreInformations?.obs }}
+      </div>
+      <div>
+        Fiança: {{ moreInformations?.fianca }}
+      </div>
+      <div>
+        Multa: {{ moreInformations?.multa }}
+      </div>
+      <div>
+        Serviços: {{ moreInformations?.servicos }}
+      </div>
+
+    </div>
+  </div>
+</div>
