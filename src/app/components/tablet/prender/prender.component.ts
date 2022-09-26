@@ -44,14 +44,9 @@ export class PrenderComponent implements OnInit {
   }
 
   updateValuesArt({listArt, quantidadeServicos, valorMulta}: any) {
-    console.log(listArt, quantidadeServicos, valorMulta);
-
     this.listArt = listArt
-
     this.quantidadeServicos = quantidadeServicos
-
     this.valorMulta = valorMulta
-
   }
 
 }

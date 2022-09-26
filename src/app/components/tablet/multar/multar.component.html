@@ -1,1 +1,29 @@
-<p>multar works!</p>
+<div class="container">
+  <div class="container--codpenal">
+    <app-codpenal (artData)="getValues($event)"></app-codpenal>
+  </div>
+  <div class="container--multar">
+    <div class="multar">
+      <div>
+        Nome: Fernando
+      </div>
+      <div>
+        Passaporte: 576
+      </div>
+      <div>
+        Ficha: Limpa
+      </div>
+      <div>
+        Valor da multa: {{ calcMulta }}
+      </div>
+      <div>
+        <span>
+          Multiplicador: {{ multiplicadorMulta - 50 }}%
+        </span>
+        <input type="range" step="10" value="50" [(ngModel)]="multiplicadorMulta">
+      </div>
+      <button>Multar</button>
+    </div>
+
+  </div>
+</div>
