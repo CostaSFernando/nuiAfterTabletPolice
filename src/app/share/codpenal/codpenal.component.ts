@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { IntegrationService } from 'src/app/services/integration.service';
 
 @Component({
   selector: 'app-codpenal',
@@ -751,11 +753,18 @@ export class CodpenalComponent implements OnInit {
   @Output() artData = new EventEmitter<any>();
 
 
-  constructor() {
+  constructor(
+    private integrationService: IntegrationService
+  ) {
     this.listCodPenal = this.codPenal
   }
 
   ngOnInit(): void {
+    this.integrationService.getPenalCode().subscribe(
+      penalCode => {
+        console.log(penalCode);
+      }
+    );
   }
 
   selectedArt(art: any, codigoPenal: any) {

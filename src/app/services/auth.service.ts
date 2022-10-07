@@ -60,8 +60,25 @@ export class AuthService {
     return this.searchPlayerObject.pipe(map( user => user ));
   }
 
-  getCurrentUser() {
-    return this.currentUser.getValue();
+  getCurrentUser(pass: any = null) {
+    if (!this.currentUser.getValue() && pass) {
+      return this.httpClient.post<any[]>(`http://${environment.tabletName}/currentUser`, {pass}).pipe(
+        map(user => {
+          const newUser = {
+            passaporte: user[0].passaporte,
+            name: user[0].firstname + ' ' + user[0].lastname,
+            patente: user[0].nome_patente,
+            rg: user[0]?.rg || '< PRIVADO >',
+            unidade: user[0]?.unidade || '< PRIVADO >',
+            tel: user[0]?.tel || '< PRIVADO >'
+          }
+          this.currentUser.next(newUser)
+          return newUser
+        })
+      );
+    } else {
+      return this.currentUser.pipe( map(x => x) );
+    }
   }
 
   getPermission(permission: string) {
@@ -92,10 +109,27 @@ export class AuthService {
 
   login(pass: number) {
     if (!environment.production) {
+      this.currentUser.next({
+        name: 'Fernando',
+        passaporte: '576',
+        idade: '21 anos',
+        patente: 'Coronel',
+        unidade: 'CORE',
+        rg: '159CE51C8E36F519',
+        tel: '108-555',
+        permissions: [
+          'prender',
+          'relatorio',
+          'multar',
+          'acao'
+        ]
+      });
       return of(true);
     } else if (environment.production) {
-      return this.httpClient.post(`http://${environment.tabletName}/login`, {pass}).pipe(
-        map(resp => resp)
+      return this.httpClient.post<boolean[]>(`http://${environment.tabletName}/login`, {pass}).pipe(
+        map(resp => {
+          return resp[0];
+        })
       )
     }
     return of(false)

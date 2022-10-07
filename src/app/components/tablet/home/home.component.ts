@@ -22,7 +22,12 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    this.user = this.auth.getCurrentUser();
+    this.auth.getCurrentUser().subscribe(
+      user => {
+        this.user = user
+      }
+    )
+
 
   }
 
