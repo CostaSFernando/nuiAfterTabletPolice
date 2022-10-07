@@ -1,7 +1,9 @@
+import { map } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from 'src/app/services/menu.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +19,8 @@ export class MenuComponent implements OnInit {
   constructor(
     private router: Router,
     private menusService: MenuService,
-    private auth: AuthService
+    private auth: AuthService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +34,20 @@ export class MenuComponent implements OnInit {
   }
 
   search() {
-    this.auth.searchUser(+this.searchPass).subscribe(
+    this.auth.searchPlayer(+this.searchPass).subscribe(
       user => {
         console.log(user);
       }
     )
   }
+
+  closeModal() {
+    this.http.post('http://policetablet/closetablet', {close: true}).subscribe(
+      resp => {
+        console.log(resp);
+      }
+    )
+  }
+
 
 }

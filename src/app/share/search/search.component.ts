@@ -40,13 +40,15 @@ export class SearchComponent implements OnInit {
       }
     );
 
+
+
     this.auth.getSearchUser().subscribe(user => {
       this.userSearch = user
     });
   }
 
   searchUser(pass: any) {
-    this.auth.searchUser(+pass.value).subscribe(
+    this.auth.searchPlayer(+pass.value).subscribe(
       user => {
         this.userSearch = user
 

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { BehaviorSubject, map, of } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -42,68 +43,62 @@ export class AuthService {
     }
   ]
 
-  private user: BehaviorSubject<any>
+  private searchPlayerObject: BehaviorSubject<any>
   private currentUser: BehaviorSubject<any>
 
-  constructor() {
-    this.user = new BehaviorSubject(null)
+  constructor(
+    private httpClient: HttpClient
+  ) {
+    this.searchPlayerObject = new BehaviorSubject(null)
     this.currentUser = new BehaviorSubject(null)
   }
 
-  searchUser(pass: string | number)  {
-    const testUser = (this.listUsersSearch.find((user: any) => user.passaporte+'' == pass)) as any
-    this.user.next(testUser)
-
-    return this.user.pipe(map(user => {
-      return user
-    }));
+  searchPlayer(pass: string | number)  {
+    if (!this.searchPlayerObject.getValue()) {
+      this.findPlayer(+pass)
+    }
+    return this.searchPlayerObject.pipe(map( user => user ));
   }
 
   getCurrentUser() {
     return this.currentUser.getValue();
   }
 
-  getSearchUser() {
-    return this.user.pipe(map( user => user));
-  }
-
   getPermission(permission: string) {
     return (this.currentUser.getValue()).permission.includes(permission);
   }
 
-  findUser(pass: number) {
+  getSearchUser() {
+    return this.searchPlayerObject.pipe(
+      map(user => user)
+    )
+  }
 
-    return this.user.pipe(
-      map(user => {
-        if (pass === 11) {
-          return user;
-        }
-        return undefined;
-      })
-    );
+  findPlayer(pass: number) {
+    if (!environment.production) {
+      const testUser = (this.listUsersSearch.find((user: any) => user.passaporte+'' == pass+'')) as any
+      this.searchPlayerObject.next(testUser)
+      return this.searchPlayerObject.pipe(map(x => x))
+    } else {
+      return this.httpClient.post(`http://${environment.tabletName}/findplayer`, {pass}).pipe(
+        map(player => {
+          this.searchPlayerObject.next(player);
+          return player
+        })
+      )
+    }
+
   }
 
   login(pass: number) {
-    if (pass === 576) {
-
-      this.currentUser.next({
-        name: 'Fernando',
-        passaporte: '576',
-        idade: '21 anos',
-        patente: 'Coronel',
-        unidade: 'CORE',
-        rg: '159CE51C8E36F519',
-        tel: '108-555',
-        permissions: [
-          'prender',
-          'relatorio',
-          'multar',
-          'acao'
-        ]
-      });
-      return true;
+    if (!environment.production) {
+      return of(true);
+    } else if (environment.production) {
+      return this.httpClient.post(`http://${environment.tabletName}/login`, {pass}).pipe(
+        map(resp => resp)
+      )
     }
-    return false;
+    return of(false)
   }
 
   verifyLoged() {

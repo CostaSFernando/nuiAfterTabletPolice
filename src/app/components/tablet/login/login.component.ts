@@ -22,11 +22,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(pass: any) {
-    if (this.auth.login(+pass)) {
-      this.controlMenu = !this.controlMenu;
-      this.menuService.updateMenu(this.controlMenu);
-      this.router.navigate(['/']);
-    }
+    this.auth.login(+pass).subscribe(
+      resp => {
+        if (resp) {
+          this.controlMenu = !this.controlMenu;
+          this.menuService.updateMenu(this.controlMenu);
+          this.router.navigate(['/']);
+        }
+      }
+    );
   }
 
 }
