@@ -54,8 +54,9 @@ export class AuthService {
   }
 
   searchPlayer(pass: string | number)  {
+    console.log(this.searchPlayerObject.getValue(), 'click search on authService with pass -> ', pass);
     if (!this.searchPlayerObject.getValue()) {
-      this.findPlayer(+pass)
+      return this.findPlayer(+pass).pipe(map( user => user ));
     }
     return this.searchPlayerObject.pipe(map( user => user ));
   }
@@ -97,10 +98,20 @@ export class AuthService {
       this.searchPlayerObject.next(testUser)
       return this.searchPlayerObject.pipe(map(x => x))
     } else {
-      return this.httpClient.post(`http://${environment.tabletName}/findplayer`, {pass}).pipe(
+      return this.httpClient.post<any>(`http://${environment.tabletName}/findplayer`, {pass}).pipe(
         map(player => {
-          this.searchPlayerObject.next(player);
-          return player
+          const newPlayerObject = {
+            bank: player.banco,
+            name: player.firstname + ' ' + player.secondname,
+            passaporte: player.passaporte,
+            rg: player.rg,
+            emprego: 'Not found',
+            tel: player.telefone,
+            multas: player.multa,
+            porte: player.porte? true : false
+          }
+          this.searchPlayerObject.next(newPlayerObject);
+          return newPlayerObject
         })
       )
     }
