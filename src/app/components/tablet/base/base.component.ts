@@ -16,6 +16,8 @@ export class BaseComponent implements OnInit {
     private integrationService: IntegrationService
   ) { }
 
+
+
   ngOnInit(): void {
     this.verifyTablet();
     this.auth.verifyLoged().subscribe(
@@ -30,6 +32,19 @@ export class BaseComponent implements OnInit {
       this.integrationService.openOrCloseTablet(nui);
     })
 
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape') {
+        this.closeTablet();
+      }
+    })
+
+  }
+
+  closeTablet() {
+    this.integrationService.closeTablet().subscribe(
+      x => { console.log('closed', x);
+      }
+    )
   }
 
   verifyTablet() {

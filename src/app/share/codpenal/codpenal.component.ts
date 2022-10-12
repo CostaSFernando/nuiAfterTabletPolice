@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { IntegrationService } from 'src/app/services/integration.service';
 
@@ -802,9 +801,7 @@ export class CodpenalComponent implements OnInit {
   }
 
   verifySelectedArt(artSearch: any) {
-
     const value = this.listArt.find(art => {
-
       if (art.art+'' === artSearch.art) {
         return true
       }

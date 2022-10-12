@@ -62,6 +62,7 @@ import { SearchComponent } from './share/search/search.component';
 import { MultarComponent } from './components/tablet/multar/multar.component';
 import { CodpenalComponent } from './share/codpenal/codpenal.component';
 import { BaseCodPenalComponent } from './components/tablet/base-cod-penal/base-cod-penal.component';
+import { AcaoComponent } from './components/tablet/acao/acao.component';
 
 
 const material = [
@@ -123,7 +124,8 @@ const material = [
     SearchComponent,
     MultarComponent,
     CodpenalComponent,
-    BaseCodPenalComponent
+    BaseCodPenalComponent,
+    AcaoComponent
   ],
   imports: [
     HttpClientModule,

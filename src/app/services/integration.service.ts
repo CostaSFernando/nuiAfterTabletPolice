@@ -24,6 +24,7 @@ export class IntegrationService {
     return this.statusTablet.pipe(
       map( status => status));
   }
+
   /**
    * Open or close tablet
    */
@@ -31,14 +32,45 @@ export class IntegrationService {
     this.statusTablet.next(possibleStatus != undefined ? possibleStatus : !this.statusTablet.getValue());
   }
 
-  prender({tempo, servicos, multa, passaporte}: {tempo: number, servicos: number, multa: number, passaporte: number}) {
+  prender({motivo, servicos, multa, passaporte}: {servicos: number, multa: number, passaporte: number, motivo: string}) {
 
+    let prisonPlayerPass, services, fine, reason;
+    prisonPlayerPass = passaporte;
+    services = servicos
+    fine = multa
+    reason = motivo
+
+    return this.httpClient.post(`http://${environment.tabletName}/prisonPlayer`, {services, fine, prisonPlayerPass, reason}).pipe(
+      map(result => console.log(result))
+    )
   }
 
   getPenalCode() {
     return this.httpClient.get(`http://${environment.tabletName}/getPenalCode`).pipe(
       map(penalCode => {
         return penalCode
+      })
+    );
+  }
+
+  setFine({passaporte, multa, motivo}: any) {
+    const fine = multa;
+    const playerPass = passaporte;
+    const reason = motivo
+
+    return this.httpClient.post(`http://${environment.tabletName}/finePlayer`, {playerPass, fine, reason}).pipe(
+      map(fine => {
+        return fine
+      })
+    );
+  }
+
+  closeTablet() {
+    return this.httpClient.post(`http://${environment.tabletName}/closePoliceTablet`, {}).pipe(
+      map(close => {
+        if (close) {
+          this.openOrCloseTablet(false);
+        }
       })
     );
   }

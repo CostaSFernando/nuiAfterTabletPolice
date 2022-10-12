@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { IntegrationService } from 'src/app/services/integration.service';
 
 @Component({
   selector: 'app-prender',
@@ -21,10 +22,13 @@ export class PrenderComponent implements OnInit {
 
   valorMulta = 0
 
+  motivo = '';
+
   constructor(
     private auth: AuthService,
     private router: Router,
-    private menu: MenuService
+    private menu: MenuService,
+    private integrationService: IntegrationService
   ) {
   }
 
@@ -47,6 +51,18 @@ export class PrenderComponent implements OnInit {
     this.listArt = listArt
     this.quantidadeServicos = quantidadeServicos
     this.valorMulta = valorMulta
+  }
+
+  prisonPlayer() {
+    const servicos = (this.quantidadeServicos - ((this.reducaoServicos / 100) * this.quantidadeServicos));
+    const multa = this.valorMulta;
+    const passaporte = this.searchUser.passaporte;
+    const motivo = this.motivo
+
+    this.integrationService.prender({motivo, multa, passaporte, servicos}).subscribe(
+      res => {console.log('prison');
+      }
+    )
   }
 
 }

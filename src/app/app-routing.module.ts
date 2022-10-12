@@ -7,6 +7,7 @@ import { MultarComponent } from './components/tablet/multar/multar.component';
 import { PrenderComponent } from './components/tablet/prender/prender.component';
 import { CodpenalComponent } from './share/codpenal/codpenal.component';
 import { SearchComponent } from './share/search/search.component';
+import { AcaoComponent } from './components/tablet/acao/acao.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'codpenal', component: BaseCodPenalComponent
+  },
+  {
+    path: 'acao', component: AcaoComponent
   },
   {
     path: '', component: HomeComponent

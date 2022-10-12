@@ -60,11 +60,11 @@
         <span>
           Descrição:
         </span>
-        <textarea name="" id="" cols="30" rows="10" resize="false"></textarea>
+        <textarea name="" id="" cols="30" rows="10" resize="false" [(ngModel)]="motivo"></textarea>
       </div>
 
       <div>
-        <button>Prender</button>
+        <button (click)="prisonPlayer()">Prender</button>
       </div>
     </div>
   </div>

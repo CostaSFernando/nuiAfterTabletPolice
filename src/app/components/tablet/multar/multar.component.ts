@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { IntegrationService } from 'src/app/services/integration.service';
 
 @Component({
   selector: 'app-multar',
@@ -7,13 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MultarComponent implements OnInit {
 
+  searchUser: any
+
   multiplicadorMulta = 50
 
   valorMulta = 0
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private integrationService: IntegrationService
+  ) { }
 
   ngOnInit(): void {
+    this.auth.getSearchUser().subscribe(
+      user => {
+        if (user)
+          this.searchUser = user
+    });
   }
 
   get calcMulta() {
@@ -27,6 +39,17 @@ export class MultarComponent implements OnInit {
 
   getValues({valorMulta, ...data}: any) {
     this.valorMulta = valorMulta
+  }
+
+
+
+  finePlayer() {
+    this.integrationService.setFine({passaporte: this.searchUser.passaporte, multa: this.calcMulta, reason: 'Not a reason'}).subscribe(
+      fine => {
+        console.log(fine);
+
+      }
+    )
   }
 
 }
