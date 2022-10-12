@@ -46,7 +46,6 @@ export class SearchComponent implements OnInit {
   }
 
   searchUser(pass: any) {
-    console.log(pass, 'click search in component')
     this.auth.searchPlayer(+pass.value).subscribe(
       user => {
         this.userSearch = user
