@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   login(pass: any) {
     this.auth.login(+pass).subscribe(
       resp => {
-        console.log('login -> ', resp);
         if (resp) {
           this.triggerCurrentUser(+pass)
         }

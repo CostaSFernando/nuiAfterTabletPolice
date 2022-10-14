@@ -1,1 +1,55 @@
-<p>acao works!</p>
+<div class="container">
+  <div class="container--acoes">
+
+    <div class="acao" *ngFor="let acao of acoes" (click)="selectAcao(acao)" [ngClass]="{'selected': acao.id === acaoSelect?.id}">
+      <div>
+        {{ acao.nome }}
+      </div>
+      <div>
+        Valor roubado: R$ {{ acao.valorRoubado }}
+      </div>
+      <div>
+        Data: {{ acao.data | date: 'dd/M/y h:mm:ss a' }}
+      </div>
+    </div>
+
+  </div>
+  <div class="container--editacao" *ngIf="acaoSelect" [ngClass]="{'finalizada': acaoSelect.finalizada}" >
+    <div>
+      {{acaoSelect.nome}}
+    </div>
+    <div>
+      Valor roubado: R$ {{ acaoSelect.valorRoubado }}
+    </div>
+    <div class="result">
+      Resultado da ação:
+      <select name="win" *ngIf="!acaoSelect.finalizada; else notFinalyWin">
+        <option value="true">Ganhou</option>
+        <option value="false">Perdeu</option>
+      </select>
+
+      <ng-template #notFinalyWin>
+        {{ acaoSelect.win? 'Ganhou' : 'Perdeu' }}
+      </ng-template>
+
+    </div>
+    <div class="selected-police">
+      Policiais:
+      <div class="polices">
+        <span *ngFor="let police of acaoSelect.policiais" (click)="removePolice(police.id)">
+          {{ police.nome }}
+        </span>
+      </div>
+      <ng-container *ngIf="!acaoSelect.finalizada">
+        <div>
+          Adicionar Policial :
+        </div>
+        <select name="policiais" #police (click)="policeSelectedForAction(police)">
+          <option value="">Selecione um policial</option>
+          <option *ngFor="let police of listPoliceAcao" [value]="police.id">{{ police.nome }}</option>
+        </select>
+      </ng-container>
+    </div>
+    <button *ngIf="!acaoSelect.finalizada"> Finalizar ação </button>
+  </div>
+</div>

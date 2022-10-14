@@ -22,7 +22,7 @@ export class BaseComponent implements OnInit {
     this.verifyTablet();
     this.auth.verifyLoged().subscribe(
       login => {
-        !login? this.router.navigate(['/login']): ''
+        // !login? this.router.navigate(['/login']): ''
       }
     );
 
