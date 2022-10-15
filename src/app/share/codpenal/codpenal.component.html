@@ -11,7 +11,7 @@
         <input [id]="'art'+cod.id" type="checkbox" [checked]="verifySelectedArt(cod) == true" (change)="selectedArt($event, cod)">
         <label [for]="'art'+cod.id" class="checkmark"></label>
       </div>
-      <div class="codpenal--content">
+      <div class="codpenal--content" (click)="selectedArtIsNoSelected(cod)">
         <div>
           <div class="art">
             Art. {{ cod.id }}
