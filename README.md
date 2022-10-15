@@ -58,7 +58,7 @@ Body:
 
 <hr>
 
-`/onPolices` -> Lista os policiais em serviço
+GET `/onPolices` -> Lista os policiais em serviço
 ```ts
 [
   {

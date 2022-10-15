@@ -54,7 +54,6 @@ export class AuthService {
   }
 
   searchPlayer(pass: string | number)  {
-    console.log(this.searchPlayerObject.getValue(), 'click search on authService with pass -> ', pass);
     if (!this.searchPlayerObject.getValue()) {
       return this.findPlayer(+pass).pipe(map( user => user ));
     }

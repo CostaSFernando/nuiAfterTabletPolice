@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchUser(pass: any) {
-    this.auth.searchPlayer(+pass.value).subscribe(
+    this.auth.searchPlayer(parseInt(pass.value)).subscribe(
       user => {
         this.userSearch = user
       }
