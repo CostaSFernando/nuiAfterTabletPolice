@@ -55,6 +55,8 @@ export class AuthService {
 
   searchPlayer(pass: string | number)  {
     if (!this.searchPlayerObject.getValue()) {
+      console.log('not searchPlayer');
+
       return this.findPlayer(+pass).pipe(map( user => user ));
     }
     return this.searchPlayerObject.pipe(map( user => user ));
@@ -93,7 +95,11 @@ export class AuthService {
 
   findPlayer(pass: number) {
     if (!environment.production) {
+      console.log('not production in findplayer');
+
       const testUser = (this.listUsersSearch.find((user: any) => user.passaporte+'' == pass+'')) as any
+      console.log(testUser);
+
       this.searchPlayerObject.next(testUser)
       return this.searchPlayerObject.pipe(map(x => x))
     } else {
@@ -150,6 +156,4 @@ export class AuthService {
       map(user => { return user? true : false })
     )
   }
-
-
 }

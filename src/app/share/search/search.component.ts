@@ -48,7 +48,14 @@ export class SearchComponent implements OnInit {
   searchUser(pass: any) {
     this.auth.searchPlayer(parseInt(pass.value)).subscribe(
       user => {
+        if (!user) {
+          alert('Jogador não encontrado!')
+        }
         this.userSearch = user
+      },
+      error => {
+        console.error(error);
+        alert('Erro na busca do jogador')
       }
     )
   }
