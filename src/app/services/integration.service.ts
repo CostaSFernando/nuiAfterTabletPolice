@@ -1,3 +1,4 @@
+import { Iacao } from './../share/model/acao.interface';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -10,10 +11,66 @@ export class IntegrationService {
 
   private statusTablet: BehaviorSubject<boolean>
 
+  private listActions: BehaviorSubject<Iacao[]>
+
   constructor(
     private httpClient: HttpClient
   ) {
     this.statusTablet = new BehaviorSubject(false);
+    this.listActions = new BehaviorSubject([{} as Iacao]);
+  }
+
+  messageObservable({data}: any) {
+    switch (data.typeAction) {
+      case 'listActions':
+        this.reactiveUpdateListActions(data)
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  finishAction(action: {
+    id: number,
+    win: boolean,
+    policiais: {
+      nome: string,
+      id: number
+    }[]
+  }) {
+    console.log(action.win);
+
+    return this.httpClient.post(`http://${environment.tabletName}/updateAction`, action).pipe(
+      map(resp => {
+        return resp
+      })
+    );
+  }
+
+  getListActions() {
+    return this.httpClient.get<{data: Iacao[]}>(`http://${environment.tabletName}/listActions`).pipe(
+      map(resp => {
+        return resp.data
+      })
+    )
+  }
+
+  listPoliceOn() {
+    return this.httpClient.get<{data: {id: number, passaporte: number, nome: string}[]}>(`http://${environment.tabletName}/onPolices`).pipe(
+      map(resp => {
+        return resp.data
+      })
+    );
+  }
+
+  private set setListActions(array: Iacao[]) {
+    this.listActions.next(array);
+  }
+
+  private reactiveUpdateListActions(data: any) {
+    const actions = data.listActions as Iacao[]
+    this.setListActions = actions
   }
 
   /**

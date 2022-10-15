@@ -1,7 +1,7 @@
 <div class="container">
   <div class="container--acoes">
 
-    <div class="acao" *ngFor="let acao of acoes" (click)="selectAcao(acao)" [ngClass]="{'selected': acao.id === acaoSelect?.id}">
+    <div class="acao" *ngFor="let acao of acoes" (click)="selectAcao(acao)" [ngClass]="{'selected': acao.id === acaoSelect.id}">
       <div>
         {{ acao.nome }}
       </div>
@@ -14,7 +14,7 @@
     </div>
 
   </div>
-  <div class="container--editacao" *ngIf="acaoSelect" [ngClass]="{'finalizada': acaoSelect.finalizada}" >
+  <div class="container--editacao" *ngIf="acaoSelect?.id" [ngClass]="{'finalizada': acaoSelect.finalizada}" >
     <div>
       {{acaoSelect.nome}}
     </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="result">
       Resultado da ação:
-      <select name="win" *ngIf="!acaoSelect.finalizada; else notFinalyWin">
+      <select name="win" *ngIf="!acaoSelect.finalizada; else notFinalyWin" (change)="updateWinAction($event)">
         <option value="true">Ganhou</option>
         <option value="false">Perdeu</option>
       </select>
@@ -50,6 +50,6 @@
         </select>
       </ng-container>
     </div>
-    <button *ngIf="!acaoSelect.finalizada"> Finalizar ação </button>
+    <button *ngIf="!acaoSelect.finalizada" (click)="finishAction(acaoSelect)"> Finalizar ação </button>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IntegrationService } from 'src/app/services/integration.service';
 import { Iacao } from 'src/app/share/model/acao.interface';
 
 @Component({
@@ -7,8 +8,6 @@ import { Iacao } from 'src/app/share/model/acao.interface';
   styleUrls: ['./acao.component.sass']
 })
 export class AcaoComponent implements OnInit {
-
-  constructor() { }
 
   policiais = [
     {
@@ -66,11 +65,24 @@ export class AcaoComponent implements OnInit {
     }
   ]
 
-  acaoSelect: any
+  acaoSelect: Iacao
 
   listPoliceAcao: {id: number, nome: string, passaporte: number}[] = []
 
+  constructor(
+    private integrationService: IntegrationService
+  ) {
+    this.acaoSelect = {} as Iacao
+  }
+
   ngOnInit(): void {
+    this.getActions();
+    this.getPolicesOnline();
+  }
+
+  updateWinAction(e: any) {
+    const valueWin = e.target.value === 'true'? true : false;
+    this.acaoSelect.win = valueWin
   }
 
   selectAcao(acao: any) {
@@ -92,8 +104,6 @@ export class AcaoComponent implements OnInit {
 
   policeSelectedForAction(police: any) {
     const selectPolice = this.listPoliceAcao.find(e => e.id === parseInt(police.value));
-    console.log(this.acaoSelect, selectPolice);
-
     if (selectPolice) {
       if (!this.acaoSelect.policiais) {
         this.acaoSelect.policiais = [];
@@ -101,6 +111,29 @@ export class AcaoComponent implements OnInit {
       this.acaoSelect.policiais.push(selectPolice);
       this.selectAcao(this.acaoSelect);
     }
+  }
+
+  getActions() {
+    this.integrationService.getListActions().subscribe(
+      resp => {
+        this.acoes = resp
+      }
+    )
+  }
+
+  getPolicesOnline() {
+    this.integrationService.listPoliceOn().subscribe(
+      resp => {
+        this.listPoliceAcao = resp
+      });
+  }
+
+  finishAction(action: Iacao) {
+    this.integrationService.finishAction({id: action.id, policiais: action.policiais? action.policiais : [], win: !!action.win}).subscribe(
+      () => {
+        this.getActions()
+      }
+    )
   }
 
 }
