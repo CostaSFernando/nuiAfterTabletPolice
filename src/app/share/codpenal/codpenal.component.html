@@ -8,10 +8,10 @@
   <div class="container--codpenal">
     <div class="codpenal" *ngFor="let cod of listCodPenal">
       <div class="codpenal--check" *ngIf="showSelected">
-        <input [id]="'art'+cod.art" type="checkbox" [checked]="verifySelectedArt(cod) == true" (change)="selectedArt($event, cod)">
-        <label [for]="'art'+cod.art" class="checkmark"></label>
+        <input [id]="'art'+cod.id" type="checkbox" [checked]="verifySelectedArt(cod) == true" (change)="selectedArt($event, cod)">
+        <label [for]="'art'+cod.id" class="checkmark"></label>
       </div>
-      <div class="codpenal--content" (click)="selectedArtIsNoSelected(cod)">
+      <div class="codpenal--content">
         <div>
           <div class="art">
             Art. {{ cod.id }}
